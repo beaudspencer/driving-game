@@ -50,11 +50,48 @@ class RaceCar extends Car {
     }
   }
 }
-var $carImg = document.createElement('img')
-$carImg.setAttribute('src', 'car-black.png')
-document.body.appendChild($carImg)
 
-var car = new Car($carImg, 10, 'north', [0, 0])
+function createElement (tag, attributes, children) {
+  var $element = document.createElement(tag)
+  if(attributes) {
+    for (var keys in attributes) {
+      $element.setAttribute(keys, attributes[keys])
+    }
+  }
+  for(var c = 0; c < children.length; c++) {
+    if(children[c] instanceof Node) {
+      $element.appendChild(children[c])
+    }
+    else {
+      $element.appendChild(document.createTextNode(children[c]))
+    }
+  }
+  return $element
+}
+
+var $selector = createElement('div', {class: 'options', style: 'text-align: center;'}, [
+  createElement('button', {id: 'car'}, ['Car']),
+  createElement('button', {id: 'race'}, ['Race Car'])
+])
+document.body.appendChild($selector)
+var $options = document.querySelector('.options')
+
+var car = null
+
+$options.addEventListener('click', function(event) {
+  if(event.target.getAttribute('id') === 'car') {
+    $carImg = createElement('img', {src: 'car-black.png'}, [])
+    document.body.appendChild($carImg)
+    car = new Car($carImg, 4, 'east', [0, 0])
+    $options.innerHTML = ''
+  }
+  else if(event.target.getAttribute('id') === 'race') {
+    $carImg = createElement('img', {src: 'race-cuur.png'}, [])
+    document.body.appendChild($carImg)
+    car = new RaceCar($carImg, 6, 'east', [0, 0], 2)
+    $options.innerHTML = ''
+  }
+})
 
 window.addEventListener('keydown', function(event) {
   if (event.key === 'ArrowDown') {
