@@ -10,10 +10,10 @@ class Car {
     this.direction = direction
     this.$img.classList.add(direction)
   }
-  move () {
+  move() {
     switch (this.direction){
         case 'north' :
-          if(this.location >= 0)
+          if(this.location[1] >= 0)
             this.location[1] -= this.speed
           break
         case 'south' :
@@ -29,9 +29,7 @@ class Car {
     this.$img.setAttribute('style', ('left: ' + this.location[0] + 'px; top: ' + this.location[1] + 'px;'))
   }
   start(){
-    var vroom = setInterval( function () {
-      this.move()
-    }, 16)
+    var vroom = setInterval(this.move.bind(this), 16)
   }
 }
 
@@ -53,5 +51,8 @@ window.addEventListener('keydown', function(event) {
   }
   if (event.key === 'ArrowLeft') {
     car.turn('west')
+  }
+  if(event.key === ' ') {
+    car.start()
   }
 })
