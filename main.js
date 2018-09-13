@@ -4,7 +4,7 @@ class Car {
     this.speed = speed
     this.direction = direction
     this.location = location
-    this.vroom = false
+    this.vroom = null
   }
   turn(direction){
     this.$img.classList.remove(this.direction)
@@ -34,7 +34,7 @@ class Car {
   }
   stop() {
     clearInterval(this.vroom)
-    this.vroom = false
+    this.vroom = null
   }
 }
 
