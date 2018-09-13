@@ -18,3 +18,18 @@ $carImg.setAttribute('style', 'width: 4rem;')
 document.body.appendChild($carImg)
 
 var car = new Car($carImg, 10, 'north', [0, 0])
+
+window.addEventListener('keydown', function(event) {
+  if (event.key === 'ArrowDown') {
+    car.turn('south')
+  }
+  if (event.key === 'ArrowUp') {
+    car.turn('north')
+  }
+  if (event.key === 'ArrowRight') {
+    car.turn('east')
+  }
+  if (event.key === 'ArrowLeft') {
+    car.turn('west')
+  }
+})
