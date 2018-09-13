@@ -70,8 +70,8 @@ function createElement (tag, attributes, children) {
 }
 
 var $selector = createElement('div', {class: 'options', style: 'text-align: center;'}, [
-  createElement('button', {id: 'car'}, ['Car']),
-  createElement('button', {id: 'race'}, ['Race Car'])
+  createElement('button', {id: 'car', style: 'width: 6rem; background-color: lightblue;'}, ['Car']),
+  createElement('button', {id: 'race', style: 'width: 6rem; background-color: orange;'}, ['Race Car'])
 ])
 document.body.appendChild($selector)
 var $options = document.querySelector('.options')
