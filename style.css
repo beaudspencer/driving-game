@@ -13,3 +13,8 @@
 .west {
   transform: rotate(270deg)
 }
+
+img {
+  position: absolute;
+  width: 4rem;
+}
