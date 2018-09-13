@@ -10,6 +10,21 @@ class Car {
     this.direction = direction
     this.$img.classList.add(direction)
   }
+  move () {
+    switch (this.direction){
+      case 'north' :
+        this.location[1] += this.speed
+        break
+      case 'south' :
+        this.location[1] -= this.speed
+        break
+      case 'east' :
+        this.location[0] += this.speed
+        break
+      case 'west' :
+        this.location[0] -= this.speed
+    }
+  }
 }
 
 var $carImg = document.createElement('img')
