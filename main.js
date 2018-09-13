@@ -28,6 +28,11 @@ class Car {
     }
     this.$img.setAttribute('style', ('left: ' + this.location[0] + 'px; top: ' + this.location[1] + 'px;'))
   }
+  start(){
+    var vroom = setInterval( function () {
+      this.move()
+    }, 16)
+  }
 }
 
 var $carImg = document.createElement('img')
