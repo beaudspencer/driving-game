@@ -120,9 +120,7 @@ window.addEventListener('keydown', function(event) {
       car.stop()
     }
   }
-  if(event.key === 'r') {
-    if (car instanceof RaceCar) {
+  if(event.key === 'r' && car instanceof RaceCar) {
       car.nitro()
-    }
   }
 })
