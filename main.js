@@ -27,6 +27,12 @@ class Car {
         if (this.location[0] >= 0)
           this.location[0] -= this.speed
     }
+    if(this.location[0] > window.innerWidth) {
+      this.location[0] = 0
+    }
+    if(this.location[1] > window.innerHeight) {
+      this.location[1] = 0
+    }
     this.$img.setAttribute('style', ('left: ' + this.location[0] + 'px; top: ' + this.location[1] + 'px;'))
   }
   start(){
