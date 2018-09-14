@@ -84,7 +84,7 @@ document.body.appendChild($selector)
 var car = null
 $carImg = createElement('img', {}, [])
 
-window.addEventListener('click', function(event) {
+$selector.addEventListener('click', function(event) {
   if(event.target.getAttribute('id') === 'car') {
     $carImg.setAttribute('src', 'car-black.png')
     car = new Car($carImg, 4, 'east', [0, 0])
