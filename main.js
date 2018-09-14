@@ -80,23 +80,22 @@ var $selector = createElement('div', {class: 'options', style: 'text-align: cent
   createElement('button', {id: 'race', style: 'width: 6rem; background-color: orange;'}, ['Race Car'])
 ])
 document.body.appendChild($selector)
-var $options = document.querySelector('.options')
 
 var car = null
+$carImg = createElement('img', {}, [])
 
-$options.addEventListener('click', function(event) {
+window.addEventListener('click', function(event) {
   if(event.target.getAttribute('id') === 'car') {
-    $carImg = createElement('img', {src: 'car-black.png'}, [])
-    document.body.appendChild($carImg)
+    $carImg.setAttribute('src', 'car-black.png')
     car = new Car($carImg, 4, 'east', [0, 0])
-    $options.innerHTML = ''
+    $selector.innerHTML = ''
   }
   else if(event.target.getAttribute('id') === 'race') {
-    $carImg = createElement('img', {src: 'race-cuur.png'}, [])
-    document.body.appendChild($carImg)
+    $carImg.setAttribute('src', 'race-cuur.png')
     car = new RaceCar($carImg, 6, 'east', [0, 0], 2)
-    $options.innerHTML = ''
+    $selector.innerHTML = ''
   }
+  document.body.appendChild($carImg)
 })
 
 window.addEventListener('keydown', function(event) {
