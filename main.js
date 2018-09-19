@@ -59,8 +59,7 @@ function createElement (tag, attributes, children) {
 }
 
 var $selector = createElement('div', {class: 'options', style: 'text-align: center;'}, [
-  createElement('button', {id: 'car', style: 'width: 6rem; background-color: lightblue;'}, ['Car']),
-  createElement('button', {id: 'race', style: 'width: 6rem; background-color: orange;'}, ['Race Car'])
+  createElement('button', {id: 'start', style: 'width: 6rem; background-color: orange;'}, ['Start!'])
 ])
 document.body.appendChild($selector)
 
@@ -69,12 +68,7 @@ $carImg = createElement('img', {}, [])
 
 $selector.addEventListener('click', function(event) {
   const $car = document.querySelector('.car')
-  if(event.target.getAttribute('id') === 'car') {
-    $carImg.setAttribute('src', 'car-black.png')
-    car = new Car($carImg, 10, 90, [0, 0], $car)
-    $selector.innerHTML = ''
-  }
-  else if(event.target.getAttribute('id') === 'race') {
+  if(event.target.getAttribute('id') === 'start') {
     $carImg.setAttribute('src', 'race-cuur.png')
     car = new RaceCar($carImg, 4, 85, [0, 0], $car, 2)
     $selector.innerHTML = ''
