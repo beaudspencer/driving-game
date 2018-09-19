@@ -1,10 +1,12 @@
 class Car {
-  constructor($img, speed, direction, location){
+  constructor($img, speed, direction, location, $container){
+    this.$container = $container
     this.$img = $img
     this.speed = speed
     this.direction = direction
     this.location = location
     this.vroom = null
+    this.$container.appendChild(this.$img)
   }
   turn(){
     this.$img.style.transform = ('rotate(' + this.direction + 'deg)')
@@ -13,7 +15,7 @@ class Car {
     const radian = this.direction *  (Math.PI / 180)
     this.location[0] += (Math.sin(radian) * this.speed)
     this.location[1] += -(Math.cos(radian) * this.speed)
-    this.$img.style.translate = this.location[0] + 'px ' +  this.location[1] + 'px'
+    this.$container.style.transform = 'translate(' + this.location[0] + 'px, ' +  this.location[1] + 'px)'
   }
   start(){
     this.vroom = setInterval(this.move.bind(this), 16)
@@ -25,8 +27,8 @@ class Car {
 }
 
 class RaceCar extends Car {
-  constructor ($img, speed, direction, location, nitros) {
-    super($img, speed, direction, location)
+  constructor ($img, speed, direction, location, $container, nitros) {
+    super($img, speed, direction, location, $container)
     this.nitros = nitros
   }
   nitro() {
@@ -66,17 +68,18 @@ var car = null
 $carImg = createElement('img', {}, [])
 
 $selector.addEventListener('click', function(event) {
+  const $car = document.querySelector('.car')
   if(event.target.getAttribute('id') === 'car') {
     $carImg.setAttribute('src', 'car-black.png')
-    car = new Car($carImg, 10, 90, [0, 0])
+    car = new Car($carImg, 10, 90, [0, 0], $car)
     $selector.innerHTML = ''
   }
   else if(event.target.getAttribute('id') === 'race') {
     $carImg.setAttribute('src', 'race-cuur.png')
-    car = new RaceCar($carImg, 4, 85, [0, 0], 2)
+    car = new RaceCar($carImg, 4, 85, [0, 0], $car, 2)
     $selector.innerHTML = ''
   }
-  document.body.appendChild($carImg)
+  document.body.appendChild($car)
 })
 
 window.addEventListener('keydown', function(event) {
