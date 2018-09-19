@@ -6,34 +6,14 @@ class Car {
     this.location = location
     this.vroom = null
   }
-  turn(direction){
-    this.$img.classList.remove(this.direction)
-    this.direction = direction
-    this.$img.classList.add(direction)
+  turn(){
+    this.$img.style.transform = ('rotate(' + this.direction + 'deg)')
   }
   move() {
-    switch (this.direction){
-        case 'north' :
-          if(this.location[1] >= 0)
-            this.location[1] -= this.speed
-          break
-        case 'south' :
-          this.location[1] += this.speed
-          break
-      case 'east' :
-        this.location[0] += this.speed
-        break
-      case 'west' :
-        if (this.location[0] >= 0)
-          this.location[0] -= this.speed
-    }
-    if(this.location[0] > window.innerWidth) {
-      this.location[0] = 0
-    }
-    if(this.location[1] > window.innerHeight) {
-      this.location[1] = 0
-    }
-    this.$img.setAttribute('style', ('left: ' + this.location[0] + 'px; top: ' + this.location[1] + 'px;'))
+    const radian = this.direction *  (Math.PI / 180)
+    this.location[0] += (Math.sin(radian) * this.speed)
+    this.location[1] += -(Math.cos(radian) * this.speed)
+    this.$img.style.translate = this.location[0] + 'px ' +  this.location[1] + 'px'
   }
   start(){
     this.vroom = setInterval(this.move.bind(this), 16)
@@ -53,6 +33,7 @@ class RaceCar extends Car {
     if(this.nitros > 0) {
       this.speed *= 2
       this.nitros--
+      setTimeout(() => this.speed = this.speed/2, 2000)
     }
   }
 }
@@ -87,29 +68,25 @@ $carImg = createElement('img', {}, [])
 $selector.addEventListener('click', function(event) {
   if(event.target.getAttribute('id') === 'car') {
     $carImg.setAttribute('src', 'car-black.png')
-    car = new Car($carImg, 4, 'east', [0, 0])
+    car = new Car($carImg, 10, 90, [0, 0])
     $selector.innerHTML = ''
   }
   else if(event.target.getAttribute('id') === 'race') {
     $carImg.setAttribute('src', 'race-cuur.png')
-    car = new RaceCar($carImg, 6, 'east', [0, 0], 2)
+    car = new RaceCar($carImg, 4, 85, [0, 0], 2)
     $selector.innerHTML = ''
   }
   document.body.appendChild($carImg)
 })
 
 window.addEventListener('keydown', function(event) {
-  if (event.key === 'ArrowDown') {
-    car.turn('south')
-  }
-  if (event.key === 'ArrowUp') {
-    car.turn('north')
-  }
   if (event.key === 'ArrowRight') {
-    car.turn('east')
+    car.direction += 5
+    car.turn()
   }
   if (event.key === 'ArrowLeft') {
-    car.turn('west')
+    car.direction -= 5
+    car.turn()
   }
   if(event.key === ' ') {
     if(!car.vroom) {
